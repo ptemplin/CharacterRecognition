@@ -5,6 +5,10 @@ import java.util.List;
 import com.petertemplin.ocr.data.CharImage;
 import com.petertemplin.ocr.model.Classifier;
 
+/**
+ * Tests the configured image set against the configured classifier.
+ *
+ */
 public class TestingSession extends Session {
 	
 	private int correct, incorrect = 0;

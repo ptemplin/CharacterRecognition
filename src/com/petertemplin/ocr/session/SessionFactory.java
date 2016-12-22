@@ -5,6 +5,9 @@ import java.util.List;
 import com.petertemplin.ocr.data.CharImage;
 import com.petertemplin.ocr.model.Classifier;
 
+/**
+ * Factory for creating an session of specific type.
+ */
 public class SessionFactory {
 
 	public static Session createSession(Classifier classifier, List<CharImage> imageData, SessionType type) {

@@ -1,5 +1,8 @@
 package com.petertemplin.ocr.data;
 
+/**
+ * Represents a classifiable character image with the human-tagged classification.
+ */
 public class CharImage {
 
 	public final double[] data;

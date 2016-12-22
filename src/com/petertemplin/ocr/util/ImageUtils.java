@@ -9,6 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * Utilities for manipulating and transforming images.
+ */
 public class ImageUtils {
 	
 	// color-grayscale conversion factors

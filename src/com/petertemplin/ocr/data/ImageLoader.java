@@ -11,6 +11,9 @@ import javax.imageio.ImageIO;
 import com.petertemplin.ocr.data.CharImage;
 import com.petertemplin.ocr.util.ImageUtils;
 
+/**
+ * Provides methods for loading single and sets of image files into CharImage objects.
+ */
 public class ImageLoader {
 
 	// chars74k data set info
@@ -33,6 +36,10 @@ public class ImageLoader {
 		this.samplesPerClass = samplesPerClass;
 	}
 	
+	/**
+	 * Load the configured set of images and randomize the order.
+	 * @return list of classifiable CharImage objects
+	 */
 	public List<CharImage> loadSet() {
 		
 		List<CharImage> images = new ArrayList<>();
@@ -53,6 +60,14 @@ public class ImageLoader {
 		return randomizeOrder(images);
 	}
 	
+	/**
+	 * Load a single image using the given image set.
+	 * 
+	 * @param classNum the index of the image class to load from
+	 * @param imageNum the image number within the class
+	 * @return CharImage representing this image file
+	 * @throws IOException if image file cannot be loaded
+	 */
 	public CharImage loadImage(int classNum, int imageNum) throws IOException {
 		String imagePath = getChars74KPath(classNum, imageNum);
 		int[][] unscaledPixels = loadPixels(imagePath);
@@ -61,12 +76,26 @@ public class ImageLoader {
 		return new CharImage(scaledPixels, classNum, imageNum);
 	}
 	
+	/**
+	 * Gets the filepath to the specified Chars74K image.
+	 *
+	 * @param classNum the image class
+	 * @param imageNum the image number within the class
+	 * @return the filepath of the image
+	 */
 	private String getChars74KPath(int classNum, int imageNum) {
 		String parentFolder = String.format("Sample%03d/", classNum);
 		String imageFile = String.format("img%03d-%05d", classNum, imageNum) + IMAGE_FILETYPE;
 		return PATH_TO_74K_IMAGES + parentFolder + imageFile;
 	}
 	
+	/**
+	 * Loads the unscaled pixels of the given image file.
+	 *
+	 * @param filePath the file to load from
+	 * @return matrix of pixels from the unscaled image
+	 * @throws IOException if image file cannot be loaded or is of unsupported size
+	 */
 	private static int[][] loadPixels(String filePath) throws IOException {
 
 		File file = new File(filePath);
@@ -82,6 +111,11 @@ public class ImageLoader {
 		return ImageUtils.convertToGrayscale(image);
 	}
 	
+	/**
+	 * Randomize the order of the given list of images.
+	 * @param list the images to randomize
+	 * @return a randomized list of images
+	 */
 	private static List<CharImage> randomizeOrder(List<CharImage> list) {
 		CharImage temp = null;
 		for(int i = 0; i < list.size(); i++) {
@@ -94,6 +128,9 @@ public class ImageLoader {
 		return list;
 	}
 	
+	/**
+	 * Supported subsets of the CHARS74K dataset.
+	 */
 	public static enum ImageSet {
 		NONE(0, 0),
 		CHARS74K_BINARY(1, 2),

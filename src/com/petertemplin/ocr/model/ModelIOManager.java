@@ -5,14 +5,25 @@ import java.util.Scanner;
 
 import com.petertemplin.ocr.model.FeedforwardNN;
 
+/**
+ * Provides methods for loading and saving state of classification models.
+ */
 public class ModelIOManager {
+	
+	private static final String ENCODING = "UTF-8";
 		
+	/**
+	 * Saves the state of network into the file specified by filepath.
+	 * 
+	 * File will be created if does not exist and overwrite any previous data.
+	 * @param network to save
+	 * @param filePath to save into
+	 */
 	public static void save(FeedforwardNN network, String filePath) {
 		System.out.println("Saving network state...");
-		// open the stream
 		PrintWriter out = null;
 		try {
-			out = new PrintWriter(filePath, "UTF-8");
+			out = new PrintWriter(filePath, ENCODING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -35,6 +46,13 @@ public class ModelIOManager {
 		
 	}
 	
+	/**
+	 * Loads a FeedForwardNN using the specified state file and config.
+	 *
+	 * @param filePath specifies the state file to load the NN from
+	 * @param config parameter configurations to build the network with
+	 * @return a FeedforwardNN representing the state in the given file and specified config
+	 */
 	public static FeedforwardNN loadFeedforwardNN(String filePath, FeedforwardNNConfig config) {
 		System.out.println("Loading network state...");
 		// open the stream

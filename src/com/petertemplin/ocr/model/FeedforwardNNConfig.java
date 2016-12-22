@@ -1,5 +1,8 @@
 package com.petertemplin.ocr.model;
 
+/**
+ * Provides the configuration with which to construct a FeedforwardNN.
+ */
 public class FeedforwardNNConfig {
 	
 	public static final double DEFAULT_WEIGHT_INIT_FACTOR = 0.005;
@@ -46,6 +49,9 @@ public class FeedforwardNNConfig {
 		this.labelOffset = labelOffset;
 	}
 	
+	/**
+	 * Builder for FeedForwardNNConfig. All parameters are configurable.
+	 */
 	public static final class Builder {
 		
 		private double weightInitFactor = DEFAULT_WEIGHT_INIT_FACTOR;

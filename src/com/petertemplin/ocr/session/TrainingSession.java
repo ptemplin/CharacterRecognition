@@ -5,6 +5,9 @@ import java.util.List;
 import com.petertemplin.ocr.data.CharImage;
 import com.petertemplin.ocr.model.Classifier;
 
+/**
+ * Trains the classifier using the imageList.
+ */
 public class TrainingSession extends Session {
 	
 	public TrainingSession(Classifier classifier, List<CharImage> imageList) {

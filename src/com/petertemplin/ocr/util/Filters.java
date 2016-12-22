@@ -2,6 +2,9 @@ package com.petertemplin.ocr.util;
 
 import com.petertemplin.ocr.data.CharImage;
 
+/**
+ * Utilities for apply image filters.
+ */
 public class Filters {
 	
 	public static final int BW_THRESHOLD = 100;

@@ -9,6 +9,9 @@ import com.petertemplin.ocr.data.ImageLoader.ImageSet;
 import com.petertemplin.ocr.model.Classifier;
 import com.petertemplin.ocr.session.Session;
 
+/**
+ * Orchestrates the creation and running of sessions for common tasks.
+ */
 public class SessionManager {
 	
 	private Classifier classifier;

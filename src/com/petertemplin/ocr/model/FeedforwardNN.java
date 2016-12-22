@@ -96,18 +96,30 @@ public class FeedforwardNN implements Classifier {
 		for(int i=0;i<config.outputSize;i++){outputLayerDeltas[i]=0;}
 	}
 	
+	/**
+	 * Propagate the image data through the hidden layer and output layer.
+	 * @param image data to propagate
+	 */
 	private void forwardPropagateData(CharImage image) {
 		calculateActivationsForHiddenLayer(image);
 		calculateOutputs();
 		// printSummaryOfOutput();
 	}
 	
+	/**
+	 * Update the network parameters using the results of a forward propagation.
+	 * @param image previously forward propagated
+	 */
 	private void backPropagate(CharImage image) {
 		calculateOutputDeltas(image);
 		updateHiddenLayer();
 		updateInputLayer(image);
 	}
 	
+	/**
+	 * Propagate the image through the first layer of the network.
+	 * @param image data to use
+	 */
 	private void calculateActivationsForHiddenLayer(CharImage image) {
 		//System.out.println("Propagating data to hidden layer");
 		for (int i = 0; i < config.hiddenLayerSize; i++) {
@@ -120,6 +132,10 @@ public class FeedforwardNN implements Classifier {
 		}
 	}
 	
+	/**
+	 * Calculate the activiations in the output layer based on hidden layer
+	 * weights and activations.
+	 */
 	private void calculateOutputs() {
 		for (int i = 0; i < config.outputSize; i++) {
 			double activation = 0;
@@ -131,6 +147,10 @@ public class FeedforwardNN implements Classifier {
 		}
 	}
 	
+	/**
+	 * Calculate the delta (error) in the classification of the specified image.
+	 * @param image previously classified
+	 */
 	private void calculateOutputDeltas(CharImage image) {
 		for(int i = 0; i < config.outputSize; i++) {
 			if(i == image.classLabel - 1) {
@@ -141,6 +161,10 @@ public class FeedforwardNN implements Classifier {
 		}
 	}
 	
+	/**
+	 * Calculate hidden layer delats and update the weights using output layer deltas and 
+	 * the configured learning rate.
+	 */
 	private void updateHiddenLayer() {
 		
 		//System.out.println("Updating hidden layer...");
@@ -159,6 +183,11 @@ public class FeedforwardNN implements Classifier {
 		}
 	}
 	
+	/**
+	 * Update the input layer of the network using the hidden layer deltas, image data, and configured
+	 * learning rate.
+	 * @param image previously classified
+	 */
 	private void updateInputLayer(CharImage image) {
 		//System.out.println("Updating input layer...");
 		for (int i = 0; i < config.inputSize; i++) {
@@ -171,6 +200,10 @@ public class FeedforwardNN implements Classifier {
 		}
 	}
 	
+	/**
+	 * Finds the maximum output activation in the output layer.
+	 * @return index of max output (0 to number of outputs - 1)
+	 */
 	private int findMaxOutput() {
 		double max = 0;
 		int indexOfMax = 0;
@@ -183,20 +216,26 @@ public class FeedforwardNN implements Classifier {
 		return indexOfMax + 1;
 	}
 	
-	
+	/**
+	 * Prints a debugging summary of the output layer to stdout.
+	 */
 	public void printSummaryOfOutput() {
 		for(int i = 0; i < config.outputSize; i++) {
 			System.out.println("Activation of " + i + ": " + outputLayerActivations[i]);
 		}
 	}
 	
-	/*
-	 * Returns a random weight between +/- WEIGHT_INIT_FACTOR
+	/**
+	 * @return a random weight between +/- weightInitFactor
 	 */
 	private double generateRandomWeight() {
 		return Math.random()*(2*config.weightInitFactor) - config.weightInitFactor;
 	}
 	
+	/**
+	 * Applies the sigmoid function to the given input.
+	 * @return sigmoid(input)
+	 */
 	private double applySigmoidFunction(double input) {
 		return (1 / (1 + Math.exp(-input)));
 	}

@@ -11,6 +11,10 @@ import com.petertemplin.ocr.data.ImageLoader;
 import com.petertemplin.ocr.data.ImageLoader.ImageSet;
 import com.petertemplin.ocr.model.Classifier;
 
+/**
+ * Starts a session which accepts input through stdin representing image files
+ * to classify and performs the classification of the image.
+ */
 public class UserInputSession extends Session {
 	
 	public UserInputSession(Classifier classifier, List<CharImage> imageList) {

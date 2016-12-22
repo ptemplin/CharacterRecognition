@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.petertemplin.ocr.data.CharImage;
 
+/**
+ * The interface for a general learning classifier.
+ */
 public interface Classifier {
 
 	/**
